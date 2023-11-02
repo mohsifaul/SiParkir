@@ -35,6 +35,7 @@
                             </tr>
                             </thead>
                             <tbody>
+                            @foreach ($datas as $data)
                             <tr>
                                 <td class="pe-0">
                                     <div class="form-check">
@@ -43,19 +44,21 @@
                                         </label>
                                     </div>
                                 </td>
-                                <td>LP001</td>
-                                <td>Lahan Parkir 1</td>
-                                <td>150 Motor</td>
+                                <td>{{$data['kdLahanParkir']}}</td>
+                                <td>{{$data['namaLahanParkir']}}</td>
+                                <td>{{$data['totalDayaTampung']}}</td>
                                 <td>
-                                <a href="#!" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
+                                    <a href="#!" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
                                     data-template="eyeOne"
                                     data-bs-toggle="modal" 
-                                    data-bs-target="#modalDetail">
+                                    data-bs-target="#modalDetail"
+                                    data-detail='@json($data)'>
                                     <i data-feather="eye" class="icon-xs"></i>
                                     <div id="eyeOne" class="d-none">
                                     <span>View</span>
                                     </div>
                                 </a>
+                                
                                 <a href="editlahanParkir" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
                                     data-template="editOne">
                                     <i data-feather="edit" class="icon-xs"></i>
@@ -72,19 +75,10 @@
                                 </a>
                                 </td>
                             </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
-                    <!-- heading -->
-                    {{-- <div class="d-flex justify-content-between align-items-center
-                        mb-3">
-                        <div>
-                            <h4 class="mb-0">Parkiran 1</h4>
-                        </div>
-                        <div class="btn bg-primary text-light rounded-2">
-                        <i class="bi bi-plus fs-4"></i> Tambah 
-                        </div>
-                    </div> --}}
                 </div>
             </div>
         </div>
@@ -102,12 +96,12 @@
                             <tr>
                                 <td>Nama Lahan Parkir</td>
                                 <td>:</td>
-                                <td>Lahan Parkir 1</td>
+                                <td id="namaLahanParkir"></td>
                             </tr>
                             <tr>
                                 <td>Daya Tampung</td>
                                 <td>:</td>
-                                <td>150 Motor</td>
+                                <td id="totalDayaTampung"></td>
                             </tr>
                         </table>
                     </div>
@@ -117,5 +111,17 @@
                 </div>
             </div>
         </div>
+        
+        <script>
+            document.querySelectorAll('.btn-ghost').forEach(function(button) {
+                button.addEventListener('click', function() {
+                    var data = JSON.parse(this.getAttribute('data-detail'));
+                    document.getElementById('namaLahanParkir').textContent = data.namaLahanParkir;
+                    document.getElementById('totalDayaTampung').textContent = data.totalDayaTampung;
+                });
+            });
+        </script>
+        
+        
     {{-- </div> --}}
 @endsection

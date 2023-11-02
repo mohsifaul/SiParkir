@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\LahanParkirController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,9 +27,7 @@ Route::get('/homepage', function () {
 Route::get('/dashboard', function () {
     return view('admin/dashboard');
 });
-Route::get('/lahanParkir', function () {
-    return view('admin/Lahan/lahanParkir');
-});
+Route::get('/lahan-parkir', [LahanParkirController::class, 'index']);
 Route::get('/tambahlahanParkir', function () {
     return view('admin/Lahan/tambahLahan');
 });
