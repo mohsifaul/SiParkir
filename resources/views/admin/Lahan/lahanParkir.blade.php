@@ -35,56 +35,46 @@
                             </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    {{-- <td class="pe-0">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="contactCheckbox2">
-                                            <label class="form-check-label" for="contactCheckbox2">
-                                            </label>
-                                        </div>
-                                    </td>
-                                    <td>LP001</td>
-                                    <td>Lahan Parkir 1</td>
-                                    <td>150 Motor</td>
-                                    <td>
-                                    <a href="#!" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                        data-template="eyeOne"
-                                        data-bs-toggle="modal" 
-                                        data-bs-target="#modalDetail">
-                                        <i data-feather="eye" class="icon-xs"></i>
-                                        <div id="eyeOne" class="d-none">
-                                        <span>View</span>
-                                        </div>
-                                    </a>
-                                    <a href="editlahanParkir" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                        data-template="editOne">
-                                        <i data-feather="edit" class="icon-xs"></i>
-                                        <div id="editOne" class="d-none">
-                                        <span>Edit</span>
-                                        </div>
-                                    </a>
-                                    <a href="#!" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                        data-template="trashOne">
-                                        <i data-feather="trash-2" class="icon-xs"></i>
-                                        <div id="trashOne" class="d-none">
-                                        <span>Delete</span>
-                                        </div>
-                                    </a>
-                                    </td> --}}
-                                </tr>
+                            <tr>
+                                <td class="pe-0">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="contactCheckbox2">
+                                        <label class="form-check-label" for="contactCheckbox2">
+                                        </label>
+                                    </div>
+                                </td>
+                                <td>LP001</td>
+                                <td>Lahan Parkir 1</td>
+                                <td>150 Motor</td>
+                                <td>
+                                <a href="#!" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
+                                    data-template="eyeOne"
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#modalDetail">
+                                    <i data-feather="eye" class="icon-xs"></i>
+                                    <div id="eyeOne" class="d-none">
+                                    <span>View</span>
+                                    </div>
+                                </a>
+                                <a href="editlahanParkir" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
+                                    data-template="editOne">
+                                    <i data-feather="edit" class="icon-xs"></i>
+                                    <div id="editOne" class="d-none">
+                                    <span>Edit</span>
+                                    </div>
+                                </a>
+                                <a href="#!" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
+                                    data-template="trashOne">
+                                    <i data-feather="trash-2" class="icon-xs"></i>
+                                    <div id="trashOne" class="d-none">
+                                    <span>Delete</span>
+                                    </div>
+                                </a>
+                                </td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>
-                    <!-- heading -->
-                    {{-- <div class="d-flex justify-content-between align-items-center
-                        mb-3">
-                        <div>
-                            <h4 class="mb-0">Parkiran 1</h4>
-                        </div>
-                        <div class="btn bg-primary text-light rounded-2">
-                        <i class="bi bi-plus fs-4"></i> Tambah 
-                        </div>
-                    </div> --}}
                 </div>
             </div>
         </div>
@@ -102,12 +92,12 @@
                             <tr>
                                 <td>Nama Lahan Parkir</td>
                                 <td>:</td>
-                                <td>Lahan Parkir 1</td>
+                                <td id="namaLahanParkir"></td>
                             </tr>
                             <tr>
                                 <td>Daya Tampung</td>
                                 <td>:</td>
-                                <td>150 Motor</td>
+                                <td id="totalDayaTampung"></td>
                             </tr>
                         </table>
                     </div>
@@ -117,6 +107,18 @@
                 </div>
             </div>
         </div>
+        
+        <script>
+            document.querySelectorAll('.btn-ghost').forEach(function(button) {
+                button.addEventListener('click', function() {
+                    var data = JSON.parse(this.getAttribute('data-detail'));
+                    document.getElementById('namaLahanParkir').textContent = data.namaLahanParkir;
+                    document.getElementById('totalDayaTampung').textContent = data.totalDayaTampung;
+                });
+            });
+        </script>
+        
+        
     {{-- </div> --}}
     <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
     <script>
