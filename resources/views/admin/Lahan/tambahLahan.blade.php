@@ -18,7 +18,7 @@
             <div class="card ">
                 <!-- card body -->
                 <div class="card-body">
-                    <form class="row g-3 needs-validation" novalidate>
+                    <form class="row g-3 needs-validation" novalidate action="/tambah" method="POST">
                         <div class="col-md-4">
                             <label for="validationCustom01" class="form-label">Kode Lahan Parkir</label>
                             <input type="text" class="form-control" id="validationCustom01" required placeholder="Masukkan Kode Lahan Parkir">

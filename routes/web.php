@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\lahanController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,6 +42,7 @@ Route::get('/logParkir', function () {
 Route::get('/maintenancealat', function () {
     return view('admin/Perangkat/maintenanceAlat');
 });
+Route::post('/tambah', [lahanController::class, 'store']);
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
