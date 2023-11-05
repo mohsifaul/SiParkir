@@ -35,43 +35,43 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td class="pe-0">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="contactCheckbox2">
-                                        <label class="form-check-label" for="contactCheckbox2">
-                                        </label>
-                                    </div>
-                                </td>
-                                <td>LP001</td>
-                                <td>Lahan Parkir 1</td>
-                                <td>150 Motor</td>
-                                <td>
-                                <a href="#!" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                    data-template="eyeOne"
-                                    data-bs-toggle="modal" 
-                                    data-bs-target="#modalDetail">
-                                    <i data-feather="eye" class="icon-xs"></i>
-                                    <div id="eyeOne" class="d-none">
-                                    <span>View</span>
-                                    </div>
-                                </a>
-                                <a href="editlahanParkir" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                    data-template="editOne">
-                                    <i data-feather="edit" class="icon-xs"></i>
-                                    <div id="editOne" class="d-none">
-                                    <span>Edit</span>
-                                    </div>
-                                </a>
-                                <a href="#!" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                    data-template="trashOne">
-                                    <i data-feather="trash-2" class="icon-xs"></i>
-                                    <div id="trashOne" class="d-none">
-                                    <span>Delete</span>
-                                    </div>
-                                </a>
-                                </td>
-                            </tr>
+                                <tr>
+                                    {{-- <td class="pe-0">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="contactCheckbox2">
+                                            <label class="form-check-label" for="contactCheckbox2">
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>LP001</td>
+                                    <td>Lahan Parkir 1</td>
+                                    <td>150 Motor</td>
+                                    <td>
+                                    <a href="#!" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
+                                        data-template="eyeOne"
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#modalDetail">
+                                        <i data-feather="eye" class="icon-xs"></i>
+                                        <div id="eyeOne" class="d-none">
+                                        <span>View</span>
+                                        </div>
+                                    </a>
+                                    <a href="editlahanParkir" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
+                                        data-template="editOne">
+                                        <i data-feather="edit" class="icon-xs"></i>
+                                        <div id="editOne" class="d-none">
+                                        <span>Edit</span>
+                                        </div>
+                                    </a>
+                                    <a href="#!" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
+                                        data-template="trashOne">
+                                        <i data-feather="trash-2" class="icon-xs"></i>
+                                        <div id="trashOne" class="d-none">
+                                        <span>Delete</span>
+                                        </div>
+                                    </a>
+                                    </td> --}}
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -118,4 +118,60 @@
             </div>
         </div>
     {{-- </div> --}}
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <script>
+        axios.get('http://localhost:8001/api/lahan-parkir')
+            .then(function (response) {
+                // handle success
+                const data = response.data.data;
+                const tableBody = document.querySelector('tbody'); // Ganti ini dengan selector yang sesuai
+                console.log(data)
+                data.forEach(item => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td class="pe-0">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="contactCheckbox2">
+                                <label class="form-check-label" for="contactCheckbox2">
+                                </label>
+                            </div>
+                        </td>
+                        <td>${item.kd_lahan_parkir}</td>
+                        <td>${item.nama_lahan_parkir}</td>
+                        <td>${item.total_daya_tampung}</td>
+                        <td>
+                            <a href="#!" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
+                                data-template="eyeOne"
+                                data-bs-toggle="modal" 
+                                data-bs-target="#modalDetail">
+                                <i data-feather="eye" class="icon-xs"></i>
+                                <div id="eyeOne" class="d-none">
+                                <span>View</span>
+                                </div>
+                            </a>
+                            <a href="editlahanParkir" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
+                                data-template="editOne">
+                                <i data-feather="edit" class="icon-xs"></i>
+                                <div id="editOne" class="d-none">
+                                <span>Edit</span>
+                                </div>
+                            </a>
+                            <a href="#!" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
+                                data-template="trashOne">
+                                <i data-feather="trash-2" class="icon-xs"></i>
+                                <div id="trashOne" class="d-none">
+                                <span>Delete</span>
+                                </div>
+                            </a>
+                        </td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+                // Loop melalui data dan tambahkan ke tabel
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            });
+    </script>
 @endsection
