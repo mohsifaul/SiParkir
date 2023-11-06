@@ -15,5 +15,10 @@ class LahanParkirController extends Controller
         return view('admin/Lahan/lahanParkir', [
             "datas" => $datas
         ]);
-    }    
+    }
+    public function post_data(){
+        $response = Http::post("https://rose-caterpillar-sari.cyclic.app/api/lahan-parkir", [
+            ""
+        ]);
+    }
 }
