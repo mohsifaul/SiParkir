@@ -16,11 +16,6 @@ class LahanParkirController extends Controller
             "datas" => $datas
         ]);
     }
-
-    public function formTambah(){
-        return view('admin/Lahan/tambahLahan'); // Atur nilai default jika gagal
-    }
-
     public function formEdit($id)
     {
         $response = Http::get("https://rose-caterpillar-sari.cyclic.app/api/lahan-parkir");
