@@ -37,6 +37,9 @@ class LahanParkirController extends Controller
         return view('admin/Lahan/editLahan', compact('dataLahan'));
     }
 
+    public function formTambah(){
+        return view('admin/Lahan/tambahLahan'); // Atur nilai default jika gagal
+    }
 
     public function tambah(Request $request) {
         $data = [
