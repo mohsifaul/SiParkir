@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LahanParkirController;
+use App\Http\Controllers\AlatController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,19 +28,20 @@ Route::get('/homepage', function () {
 Route::get('/dashboard', function () {
     return view('admin/dashboard');
 });
+// Lahan Parkir
 Route::get('/lahan-parkir', [LahanParkirController::class, 'index']);
-Route::get('/tambahlahanParkir', function () {
-    return view('admin/Lahan/tambahLahan');
-});
-Route::get('/editlahanParkir', function () {
-    return view('admin/Lahan/editLahan');
-});
+Route::get('/tambah-lahan-parkir', [LahanParkirController::class, 'formTambah']);
+Route::post('/tambah-lahanParkir', [LahanParkirController::class, 'tambah']);
+Route::get('/edit-lahan/{id}', [LahanParkirController::class, 'formEdit'])->name('edit-lahan');
 Route::get('/logParkir', function () {
     return view('admin/Lahan/logParkir');
 });
+
+// alat IoT
 Route::get('/maintenancealat', function () {
     return view('admin/Perangkat/maintenanceAlat');
 });
+Route::get('/alat-iot', [AlatController::class, 'index']);
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
