@@ -34,30 +34,41 @@
                                     <td>{{$data['kdLahanParkir']}}</td>
                                     <td>{{$data['namaLahanParkir']}}</td>
                                     <td>{{$data['totalDayaTampung']}}</td>
-                                    <td>
-                                        <a href="#!" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                            data-template="eyeOne"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#modalDetail"
-                                            data-detail='@json($data)'>
-                                            <i data-feather="eye" class="icon-xs"></i>
-                                            <div id="eyeOne" class="d-none">
-                                            <span>View</span>
-                                            </div>
-                                        </a>
-                                        <a href="{{ route('edit-lahan', ['id' => $data['id']]) }}" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip" data-template="editOne">
-                                            <i data-feather="edit" class="icon-xs"></i>
-                                            <div id="editOne" class="d-none">
-                                                <span>Edit</span>
-                                            </div>
-                                        </a>
-                                        <a href="#!" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                            data-template="trashOne">
-                                            <i data-feather="trash-2" class="icon-xs"></i>
-                                            <div id="trashOne" class="d-none">
-                                            <span>Delete</span>
-                                            </div>
-                                        </a>
+                                    <td class="text-center aligns-item-center">
+                                        <div class="button-container d-flex justify-content-center align-items-center posting-form">
+                                            <a href="#!" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
+                                                data-template="eyeOne"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#modalDetail"
+                                                data-detail='@json($data)'>
+                                                <i data-feather="eye" class="icon-xs"></i>
+                                                <div id="eyeOne" class="d-none">
+                                                <span>View</span>
+                                                </div>
+                                            </a>
+                                            <a href="{{ route('edit-lahan', ['id' => $data['id']]) }}" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip" data-template="editOne">
+                                                <i data-feather="edit" class="icon-xs"></i>
+                                                <div id="editOne" class="d-none">
+                                                    <span>Edit</span>
+                                                </div>
+                                            </a>
+                                            <form action="{{ route('hapus-lahan', $data['id']) }}" method="post">
+                                                @csrf
+                                                <button type="submit" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip delete-btn"><i data-feather="trash-2" class="icon-xs"></i>
+                                                    <div id="trashOne" class="d-none">
+                                                        <span>Delete</span>
+                                                    </div>
+                                                </button>
+                                            {{-- <a href="" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip delete-btn"
+                                                data-template="trashOne"
+                                                data-id="{{ $data['id'] }}">
+                                                <i data-feather="trash-2" class="icon-xs"></i>
+                                                <div id="trashOne" class="d-none">
+                                                    <span>Delete</span>
+                                                </div>
+                                            </a> --}}
+                                            </form>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach
@@ -98,6 +109,29 @@
         </div>
         
         <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const deleteButtons = document.querySelectorAll('.delete-btn');
+                deleteButtons.forEach(function(button) {
+                    button.addEventListener('click', function(event) {
+                        event.preventDefault();
+                        const form = this.closest('form');
+                        Swal.fire({
+                            title: 'Konfirmasi',
+                            text: 'Apakah Anda yakin ingin menghapus?',
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Hapus',
+                            cancelButtonText: 'Batal'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                form.submit();
+                            }
+                        });
+                    });
+                });
+            });
             document.querySelectorAll('.btn-ghost').forEach(function(button) {
                 button.addEventListener('click', function() {
                     var data = JSON.parse(this.getAttribute('data-detail'));

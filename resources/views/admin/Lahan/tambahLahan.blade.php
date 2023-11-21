@@ -23,7 +23,7 @@
                         @csrf
                         <div class="col-md-4">
                             <label for="validationCustom01" class="form-label">Kode Lahan Parkir</label>
-                            <input type="text" class="form-control" id="validationCustom01" required placeholder="Masukkan Kode Lahan Parkir" name="kdLahanParkir">
+                            <input type="text" class="form-control" id="validationCustom01" required placeholder="Masukkan Kode Lahan Parkir" name="kdLahanParkir" value="{{ $kdLahanParkir }}">
                             <div class="valid-feedback">Looks good!</div>
                             <div class="invalid-feedback">Harap Isi Bidang ini.</div>
                         </div>

@@ -34,11 +34,11 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link has-arrow  collapsed " href="#!" data-bs-toggle="collapse" data-bs-target="#navPages" aria-expanded="false" aria-controls="navPages">
+                <a class="nav-link has-arrow  collapsed " href="#!" data-bs-toggle="collapse" data-bs-target="#navPages1" aria-expanded="false" aria-controls="navPages">
                     <i data-feather="layers" class="nav-icon icon-xs me-2"></i> Data Alat
                 </a>
 
-                <div id="navPages" class="collapse " data-bs-parent="#sideNavbar">
+                <div id="navPages1" class="collapse " data-bs-parent="#sideNavbar">
                     <ul class="nav flex-column">
                         <li class="nav-item">
                             <a class="nav-link " href="/alat-iot">Data Alat IoT</a>
