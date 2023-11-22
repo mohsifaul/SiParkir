@@ -64,7 +64,7 @@
                                             <span>View</span>
                                             </div>
                                         </a>
-                                        <a href="editlahanParkir" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
+                                        <a href="{{route('edit-alat', ['id' => $data['id']]) }}" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
                                             data-template="editOne">
                                             <i data-feather="edit" class="icon-xs"></i>
                                             <div id="editOne" class="d-none">

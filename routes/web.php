@@ -46,6 +46,7 @@ Route::get('/maintenancealat', function () {
 Route::get('/alat-iot', [AlatController::class, 'index']);
 Route::get('/tambah-alat-iot', [AlatController::class, 'formTambah'])->name('tambah-alat');
 Route::post('/tambah-alat', [AlatController::class, 'tambah'])->name('tambah-iot');
+Route::get('/edit-alat/{id}', [AlatController::class, 'formEdit'])->name('edit-alat');
 Route::post('/hapus-alat/{id}', [AlatController::class, 'destroy'])->name('hapus-alat');
 
 // Route::get('/dashboard', function () {

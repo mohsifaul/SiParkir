@@ -42,6 +42,29 @@ class AlatController extends Controller
         return view('admin.Perangkat.tambahalat', ['data' => $data]);
     } 
 
+    public function formEdit($id)
+    {
+        $response = Http::get('https://rose-caterpillar-sari.cyclic.app/api/alat-iot');
+        $responseLahan = Http::get('https://rose-caterpillar-sari.cyclic.app/api/lahan-parkir');
+        // Decode response JSON
+        $data = $response->json()['data'];
+        $dataLahan = $responseLahan->json()['data'];
+        // Cari data dengan ID yang sesuai
+        $dataAlat = null;
+        foreach ($data as $dataA) {
+            if ($dataA['id'] === $id) {
+                $dataAlat = $dataA;
+                break;
+            }
+        }
+
+        if ($dataAlat === null) {
+            return redirect('/alat-iot')->with('error', 'Data tidak ditemukan');
+        }
+
+        return view('admin/Perangkat/editAlat', compact('dataAlat', 'dataLahan'));
+    } 
+
     public function tambah(Request $request)
     {   
         $data = $request->validate([
