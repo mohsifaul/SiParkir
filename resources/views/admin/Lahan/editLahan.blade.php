@@ -18,22 +18,24 @@
             <div class="card ">
                 <!-- card body -->
                 <div class="card-body">
-                    <form class="row g-3 needs-validation" novalidate action="" method="POST">
+                    <form class="row g-3 needs-validation" novalidate action="{{ route('update-lahan', $dataLahan['id']) }}" method="POST">
+                        @csrf
                         <div class="col-md-4">
                             <label for="validationCustom01" class="form-label">Kode Lahan Parkir</label>
                             <input type="text" class="form-control" id="validationCustom01" required placeholder="Masukkan Kode Lahan Parkir" readonly disabled value="{{ $dataLahan['kdLahanParkir'] }}">
+                            <input type="hidden" class="form-control" id="validationCustom01" required placeholder="Masukkan Kode Lahan Parkir" value="{{ $dataLahan['kdLahanParkir'] }}" name="kdLahanParkir">
                             <div class="valid-feedback">Looks good!</div>
                             <div class="invalid-feedback">Harap Isi Bidang ini.</div>
                         </div>
                         <div class="col-md-4">
                             <label for="validationCustom02" class="form-label">Nama Lahan Parkir</label>
-                            <input type="text" class="form-control" id="validationCustom02" required value="{{ $dataLahan['namaLahanParkir'] }}" placeholder="Masukkan Nama Lahan Parkir">
+                            <input type="text" class="form-control" id="validationCustom02" required value="{{ $dataLahan['namaLahanParkir'] }}" placeholder="Masukkan Nama Lahan Parkir" name="namaLahanParkir">
                             <div class="valid-feedback">Looks good!</div>
                             <div class="invalid-feedback">Harap Isi Bidang ini.</div>
                         </div>
                         <div class="col-md-4">
                             <label for="validationCustom02" class="form-label">Daya Tampung Lahan Parkir</label>
-                            <input type="number" class="form-control" id="validationCustom02" required value="{{ $dataLahan['totalDayaTampung'] }}" placeholder="Masukkan Total Daya Tampung">
+                            <input type="number" class="form-control" id="validationCustom02" required value="{{ $dataLahan['totalDayaTampung'] }}" placeholder="Masukkan Total Daya Tampung"  name="totalDayaTampung">
                             <div class="valid-feedback">Looks good!</div>
                             <div class="invalid-feedback">Harap Isi Bidang ini.</div>
                         </div>

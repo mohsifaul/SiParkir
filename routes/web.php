@@ -33,6 +33,8 @@ Route::get('/lahan-parkir', [LahanParkirController::class, 'index']);
 Route::get('/tambah-lahan-parkir', [LahanParkirController::class, 'formTambah']);
 Route::post('/tambah-lahanParkir', [LahanParkirController::class, 'tambah']);
 Route::get('/edit-lahan/{id}', [LahanParkirController::class, 'formEdit'])->name('edit-lahan');
+Route::post('/update-lahan/{id}', [LahanParkirController::class, 'update'])->name('update-lahan');
+Route::post('/hapus-lahan/{id}', [LahanParkirController::class, 'destroy'])->name('hapus-lahan');
 Route::get('/logParkir', function () {
     return view('admin/Lahan/logParkir');
 });
@@ -42,6 +44,9 @@ Route::get('/maintenancealat', function () {
     return view('admin/Perangkat/maintenanceAlat');
 });
 Route::get('/alat-iot', [AlatController::class, 'index']);
+Route::get('/tambah-alat-iot', [AlatController::class, 'formTambah'])->name('tambah-alat');
+Route::post('/tambah-alat', [AlatController::class, 'tambah'])->name('tambah-iot');
+Route::post('/hapus-alat/{id}', [AlatController::class, 'destroy'])->name('hapus-alat');
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
