@@ -45,6 +45,8 @@ Route::get('/logParkir', function () {
 //     return view('admin/Perangkat/maintenanceAlat');
 // });
 Route::get('/maintenance-alat', [MaintenanceAlat::class, 'index']);
+Route::get('/tambah-maintenance-alat', [MaintenanceAlat::class, 'formTambah']);
+Route::post('/simpan-maintenance-alat', [MaintenanceAlat::class, 'tambah'])->name('simpan-maintenance');
 
 Route::get('/alat-iot', [AlatController::class, 'index']);
 Route::get('/tambah-alat-iot', [AlatController::class, 'formTambah'])->name('tambah-alat');
