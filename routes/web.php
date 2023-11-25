@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LahanParkirController;
 use App\Http\Controllers\AlatController;
+use App\Http\Controllers\MaintenanceAlat;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,13 +41,16 @@ Route::get('/logParkir', function () {
 });
 
 // alat IoT
-Route::get('/maintenancealat', function () {
-    return view('admin/Perangkat/maintenanceAlat');
-});
+// Route::get('/maintenancealat', function () {
+//     return view('admin/Perangkat/maintenanceAlat');
+// });
+Route::get('/maintenance-alat', [MaintenanceAlat::class, 'index']);
+
 Route::get('/alat-iot', [AlatController::class, 'index']);
 Route::get('/tambah-alat-iot', [AlatController::class, 'formTambah'])->name('tambah-alat');
 Route::post('/tambah-alat', [AlatController::class, 'tambah'])->name('tambah-iot');
 Route::get('/edit-alat/{id}', [AlatController::class, 'formEdit'])->name('edit-alat');
+Route::post('/update-alat/{id}', [AlatController::class, 'update'])->name('update-alat');
 Route::post('/hapus-alat/{id}', [AlatController::class, 'destroy'])->name('hapus-alat');
 
 // Route::get('/dashboard', function () {

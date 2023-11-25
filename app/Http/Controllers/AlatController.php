@@ -19,19 +19,31 @@ class AlatController extends Controller
         $dataL = $lahan->json()['data'];
 
         // Menyesuaikan data kdLahanParkir dengan namaLahanParkir
+        $found = false; // Flag untuk menandai kesesuaian
+
         foreach ($datas as &$data) {
             foreach ($dataL as $lahan) {
                 if ($data['kdLahanParkir'] === $lahan['kdLahanParkir']) {
                     $data['kdLahanParkir'] = $lahan['namaLahanParkir'];
+                    $found = true; // Set flag menjadi true jika ada kesesuaian
                     break; // Jika sudah ditemukan, hentikan pencarian
                 }
             }
+            
+            // Check apakah ada kesesuaian, jika tidak, atur nilai khusus
+            if (!$found) {
+                $data['kdLahanParkir'] = "Lahan Parkir Tidak ditemukan";
+            }
+
+            // Reset flag untuk iterasi selanjutnya
+            $found = false;
         }
 
         return view('admin.Perangkat.alat', [
             "datas" => $datas
         ]);
     }
+
 
     public function formTambah()
     {
@@ -99,6 +111,29 @@ class AlatController extends Controller
         }
     }
 
+    public function update(Request $request, $id)
+    {
+        $data = [
+            'kdAlat' => $request->kdAlat,
+            'namaLahanParkir' => $request->namaLahanParkir,
+            'tanggalPasang' => $request->tanggalPasang,
+            'statusAlat' => $request->statusAlat,
+            'terakhirMaintenance' => $request->terakhirMaintenance,
+            'jadwalMaintenance' => $request->jadwalMaintenance,
+            'kdLahanParkir' => $request->kdLahanParkir,
+        ];
+
+        // dd($request->all());
+        $response = Http::put("https://rose-caterpillar-sari.cyclic.app/api/alat-iot/{$id}", $data);
+        
+        if ($response->successful()) {
+            toast('Data Berhasil Diupdate', 'success');
+            return redirect('/alat-iot');
+        } else {
+            toast('Data Gagal Diupdate', 'error');
+            return redirect('/alat-iot');
+        }
+    }
     public function destroy($id)
     {
         $response = Http::delete("https://rose-caterpillar-sari.cyclic.app/api/alat-iot/{$id}");

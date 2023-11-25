@@ -41,20 +41,20 @@
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#modalDetail"
                                                 data-detail='@json($data)'>
-                                                <i data-feather="eye" class="icon-xs"></i>
+                                                <i data-feather="eye" class="icon-xs text-info"></i>
                                                 <div id="eyeOne" class="d-none">
                                                 <span>View</span>
                                                 </div>
                                             </a>
-                                            <a href="{{ route('edit-lahan', ['id' => $data['id']]) }}" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip" data-template="editOne">
-                                                <i data-feather="edit" class="icon-xs"></i>
+                                            <a href="{{ route('edit-lahan', ['id' => $data['id']]) }}" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip" data-template="editOne" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
+                                                <i data-feather="edit" class="icon-xs text-warning"></i>
                                                 <div id="editOne" class="d-none">
                                                     <span>Edit</span>
                                                 </div>
                                             </a>
                                             <form action="{{ route('hapus-lahan', $data['id']) }}" method="post">
                                                 @csrf
-                                                <button type="submit" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip delete-btn"><i data-feather="trash-2" class="icon-xs"></i>
+                                                <button type="submit" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip delete-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus"><i data-feather="trash-2" class="icon-xs text-danger"></i>
                                                     <div id="trashOne" class="d-none">
                                                         <span>Delete</span>
                                                     </div>
@@ -130,6 +130,10 @@
                             }
                         });
                     });
+                });
+                const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+                const tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                    return new bootstrap.Tooltip(tooltipTriggerEl);
                 });
             });
             document.querySelectorAll('.btn-ghost').forEach(function(button) {

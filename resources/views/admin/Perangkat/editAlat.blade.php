@@ -24,8 +24,9 @@
 
             <div class="card ">
                 <!-- card body -->
+                
                 <div class="card-body">
-                    <form class="row g-3 needs-validation" novalidate action="{{route('tambah-iot')}}" method="POST">
+                    <form class="row g-3 needs-validation" novalidate action="{{route('update-alat', $dataAlat['id'])}}" method="POST">
                         @csrf
                         <div class="col-md-3">
                             <label for="validationCustom01" class="form-label">Kode Perangkat IoT</label>

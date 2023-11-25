@@ -50,7 +50,14 @@
                                         <span class="badge badge-xl bg-warning">Perangkat Dalam Perbaikan</span>
                                     @endif
                                 </td>
-                                <td>{{ isset($data['kdLahanParkir']) ? $data['kdLahanParkir'] : 'Nama Tidak Ditemukan' }}</td>
+                                <td>
+                                    @if($data['kdLahanParkir'] === 'Lahan Parkir Tidak ditemukan')
+                                        <span class="text-danger fw-bold">{{ $data['kdLahanParkir'] }}</span>
+                                    @else
+                                        {{ $data['kdLahanParkir'] }}
+                                    @endif
+                                </td>
+                                {{-- <td>{{ isset($data['kdLahanParkir']) ? $data['kdLahanParkir'] : 'Lahan Parkir Tidak Ditemukan' }}</td> --}}
                                 <td>{{ date('d M Y', strtotime($data['jadwalMaintenance'])) }}</td>
                                 <td class="text-center aligns-item-center">
                                     <div class="button-container d-flex justify-content-center align-items-center posting-form">

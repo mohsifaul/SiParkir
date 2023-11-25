@@ -44,7 +44,7 @@
                             <a class="nav-link " href="/alat-iot">Data Alat IoT</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link has-arrow"  href="/maintenancealat" >Maintenance Alat IoT</a>
+                            <a class="nav-link has-arrow"  href="/maintenance-alat" >Maintenance Alat IoT</a>
                         </li>
                     </ul>
                 </div>
