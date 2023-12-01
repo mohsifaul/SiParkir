@@ -43,26 +43,28 @@
                                             <i data-feather="eye" class="icon-xs"></i>
                                         </button>
                                     </td>
-                                    <td >
-                                        <a href="#!" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                            data-template="eyeOne"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#modalDetail"
-                                            data-detail='@json($item)'>
-                                            <i data-feather="eye" class="icon-xs text-info"></i>
-                                            <div id="eyeOne" class="d-none">
-                                            <span>View</span>
-                                            </div>
-                                        </a>
-                                        <form action="{{ route('hapus-maintenance', $item['id']) }}" method="post">
-                                            @csrf
-                                            <button type="submit" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip delete-btn">
-                                                <i data-feather="trash-2" class="icon-xs text-danger"></i>
-                                                <div id="trashOne" class="d-none">
-                                                    <span>Delete</span>
+                                    <td class="text-center aligns-item-center">
+                                        <div class="button-container d-flex justify-content-center align-items-center posting-form">
+                                            <a href="#!" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
+                                                data-template="eyeOne"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#modalDetail"
+                                                data-detail='@json($item)'>
+                                                <i data-feather="eye" class="icon-xs text-info"></i>
+                                                <div id="eyeOne" class="d-none">
+                                                <span>View</span>
                                                 </div>
-                                            </button>
-                                        </form>
+                                            </a>
+                                            <form action="{{ route('hapus-maintenance', $item['id']) }}" method="post">
+                                                @csrf
+                                                <button type="submit" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip delete-btn">
+                                                    <i data-feather="trash-2" class="icon-xs text-danger"></i>
+                                                    <div id="trashOne" class="d-none">
+                                                        <span>Delete</span>
+                                                    </div>
+                                                </button>
+                                            </form>
+                                        </div>
                                     </td>
                                 </tr>
                                 @endforeach
