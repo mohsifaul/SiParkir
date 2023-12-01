@@ -26,9 +26,10 @@ Route::get('/login', function () {
 Route::get('/homepage', function () {
     return view('welcome');
 });
-Route::get('/dashboard', function () {
-    return view('admin/dashboard');
-});
+// Route::get('/dashboard', function () {
+//     return view('admin/dashboard');
+// });
+Route::get('/dashboard', [LahanParkirController::class, 'dashboard']);
 // Lahan Parkir
 Route::get('/lahan-parkir', [LahanParkirController::class, 'index']);
 Route::get('/tambah-lahan-parkir', [LahanParkirController::class, 'formTambah']);

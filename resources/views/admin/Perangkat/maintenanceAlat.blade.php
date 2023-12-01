@@ -43,7 +43,7 @@
                                             <i data-feather="eye" class="icon-xs"></i>
                                         </button>
                                     </td>
-                                    <td>
+                                    <td >
                                         <a href="#!" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
                                             data-template="eyeOne"
                                             data-bs-toggle="modal"

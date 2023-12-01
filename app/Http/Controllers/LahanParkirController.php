@@ -8,6 +8,15 @@ use Illuminate\Support\Facades\Log;
 
 class LahanParkirController extends Controller
 {
+    public function dashboard()
+    {
+        $response = Http::get("https://rose-caterpillar-sari.cyclic.app/api/lahan-parkir");
+        $datas = $response ->json()['data'];
+        
+        return view('admin/dashboard', [
+            "datas" => $datas
+        ]);
+    }
     public function index() {
         $response = Http::get("https://rose-caterpillar-sari.cyclic.app/api/lahan-parkir");
         $datas = $response ->json()['data'];
