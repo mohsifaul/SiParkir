@@ -45,19 +45,24 @@
                                     </td>
                                     <td>
                                         <a href="#!" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                            data-template="eyeOne" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat">
+                                            data-template="eyeOne"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#modalDetail"
+                                            data-detail='@json($item)'>
                                             <i data-feather="eye" class="icon-xs text-info"></i>
                                             <div id="eyeOne" class="d-none">
                                             <span>View</span>
                                             </div>
                                         </a>
-                                        <a href="#!" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                            data-template="trashOne" data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus">
-                                            <i data-feather="trash-2" class="icon-xs text-danger"></i>
-                                            <div id="trashOne" class="d-none">
-                                            <span>Delete</span>
-                                            </div>
-                                        </a>
+                                        <form action="{{ route('hapus-maintenance', $item['id']) }}" method="post">
+                                            @csrf
+                                            <button type="submit" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip delete-btn">
+                                                <i data-feather="trash-2" class="icon-xs text-danger"></i>
+                                                <div id="trashOne" class="d-none">
+                                                    <span>Delete</span>
+                                                </div>
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -94,6 +99,51 @@
         </div>
     </div>
 
+    <div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Detail Data Maintenance</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table>
+                        <tr>
+                            <td>Kode Perawatan</td>
+                            <td>:</td>
+                            <td id="kdPerawatan" class="fw-bold"></td>
+                        </tr>
+                        <tr>
+                            <td>Kode Alat</td>
+                            <td>:</td>
+                            <td id="kdAlat"></td>
+                        </tr>
+                        <tr>
+                            <td>Tanggal Perawatan</td>
+                            <td>:</td>
+                            <td id="tanggalPerawatan"></td>
+                        </tr>
+                        <tr>
+                            <td>Keterangan</td>
+                            <td>:</td>
+                            <td id="keterangan"></td>
+                        </tr>
+                        <tr>
+                            <td>Nama Pengecek</td>
+                            <td>:</td>
+                            <td id="namaPengecek"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary text-light" data-bs-dismiss="modal">OKE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const modalImage = document.getElementById('modalImage');
@@ -108,10 +158,52 @@
                 });
             });
 
+            const deleteButtons = document.querySelectorAll('.delete-btn');
+            deleteButtons.forEach(function(button) {
+                button.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const form = this.closest('form');
+                    Swal.fire({
+                        title: 'Konfirmasi',
+                        text: 'Apakah Anda yakin ingin menghapus?',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Hapus',
+                        cancelButtonText: 'Batal'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            form.submit();
+                        }
+                    });
+                });
+            });
+
             // Initialize tooltips
             const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
             const tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
                 return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+
+            //modal detail
+            document.querySelectorAll('.btn-ghost').forEach(function(button) {
+                button.addEventListener('click', function() {
+                    var data = JSON.parse(this.getAttribute('data-detail'));
+
+                    var kdPerawatan = data.kdPerawatan + " - " + (data.kdAlat ? data.kdAlat : 'Nama Tidak Ditemukan');
+                    document.getElementById('kdPerawatan').textContent = kdPerawatan;
+                    document.getElementById('kdAlat').textContent = data.kdAlat;
+
+                    // Format tanggal tanggalPerawatan
+                    var tanggalPerawatan = new Date(data.tanggalPerawatan);
+                    var formattedtanggalPerawatan = tanggalPerawatan.getDate() + ' ' + tanggalPerawatan.toLocaleString('default', { month: 'long' }) + ' ' + tanggalPerawatan.getFullYear();
+                    document.getElementById('tanggalPerawatan').textContent = formattedtanggalPerawatan;
+
+                    
+                    document.getElementById('keterangan').textContent = data.keterangan;
+                    document.getElementById('namaPengecek').textContent = data.namaPengecek;
+                });
             });
         });
     </script>

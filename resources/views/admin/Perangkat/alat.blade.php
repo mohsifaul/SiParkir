@@ -12,7 +12,7 @@
                 </div>
                 <a href="{{route('tambah-alat')}}" class="btn btn-light text-primary fw-bold"><i class="bi bi-plus-circle-fill"></i> Tambah</a>
             </div>
-        </div>
+        </div> 
     </div>
     <div class="col-xl-12 col-lg-12 col-md-12 col-12 mt-3">
         <div class="card ">

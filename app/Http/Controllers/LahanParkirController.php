@@ -107,7 +107,7 @@ class LahanParkirController extends Controller
     public function destroy($id)
     {
         $response = Http::delete("https://rose-caterpillar-sari.cyclic.app/api/lahan-parkir/{$id}");
-        
+        // dd($response);
         if ($response->successful()) {
             alert()->success('Berhasil','Data Berhasil Dihapus');
             // toast('Data Berhasil Dihapus', 'success');
