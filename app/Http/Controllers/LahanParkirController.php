@@ -19,8 +19,16 @@ class LahanParkirController extends Controller
     }
     public function index() {
         $response = Http::get("https://rose-caterpillar-sari.cyclic.app/api/lahan-parkir");
-        $datas = $response ->json()['data'];
-        
+        $data = $response->json();
+
+        // Periksa apakah respons berhasil dan memiliki data
+        if ($response->successful() && isset($data['data'])) {
+            $datas = $data['data'];
+        } else {
+            // Jika respons tidak berhasil atau tidak memiliki data, atur $datas menjadi array kosong
+            $datas = [];
+        }
+
         return view('admin/Lahan/lahanParkir', [
             "datas" => $datas
         ]);
@@ -74,21 +82,27 @@ class LahanParkirController extends Controller
         return view('admin/Lahan/editLahan', compact('dataLahan'));
     }
 
-
     public function tambah(Request $request) {
+        $totalDayaTampung = (int)$request->totalDayaTampung;
+
         $data = [
-            'kdLahanParkir' => $request->kdLahanParkir,
+            'kdLahanParkir' =>  $request->kdLahanParkir,
             'namaLahanParkir' => $request->namaLahanParkir,
-            'totalDayaTampung' => (int)$request->totalDayaTampung
+            'totalDayaTampung' => $totalDayaTampung
         ];
 
+        // Mengatur sisatotaldaya dengan nilai yang sama dengan totalDayaTampung
+        $data['sisaTotalDayaTampung'] = $totalDayaTampung;
+
+        // dd($data); // Uncomment this line to debug and check the data before sending the request
+
         $response = Http::post("https://rose-caterpillar-sari.cyclic.app/api/lahan-parkir", $data);
-        
+
         if ($response->successful()) {
             toast('Data Berhasil Ditambahkan', 'success');
             return redirect('/lahan-parkir');
         } else {
-            toast('Data Gagal Ditambahkan', 'error');
+            alert()->error('Data Invalid', 'Kode Lahan Parkir sudah ada');
             return redirect('/lahan-parkir');
         }
     }

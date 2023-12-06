@@ -22,12 +22,6 @@ class MaintenanceAlat extends Controller
         $dataLog = $log->json()['data'] ?? [];
     
         if (!empty($dataLog)) {
-            // Mendapatkan data dari API log perawatan berhasil dilakukan
-            // Lakukan pemrosesan data jika 'data' ada dalam respon API
-            // ...
-    
-            // Misalnya, melakukan penggabungan data berdasarkan kdAlat dan namaAlat
-            // Lakukan pemrosesan sesuai kebutuhan aplikasi Anda
             foreach ($dataLog as &$log) {
                 foreach ($datas as $data) {
                     if ($log['kdAlat'] === $data['kdAlat']) {
@@ -37,8 +31,6 @@ class MaintenanceAlat extends Controller
                 }
             }
         } else {
-            // Lakukan penanganan jika 'data' tidak ada dalam respon API
-            // Misalnya, mengatur $dataLog ke nilai default atau memberikan pesan kepada pengguna
             $dataLog = []; // Atau nilai lain yang sesuai dengan kebutuhan aplikasi Anda
         }
     

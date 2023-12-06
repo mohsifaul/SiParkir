@@ -16,12 +16,12 @@ class AlatController extends Controller
 
         // Mendapatkan data dari API lahan parkir
         $lahan = Http::get('https://rose-caterpillar-sari.cyclic.app/api/lahan-parkir');
-        $dataL = $lahan->json()['data'];
+        $dataL = $lahan->json()['data'] ?? []; // Menangani jika $dataL kosong
 
         // Menyesuaikan data kdLahanParkir dengan namaLahanParkir
-        $found = false; // Flag untuk menandai kesesuaian
-
         foreach ($datas as &$data) {
+            $found = false; // Flag untuk menandai kesesuaian
+
             foreach ($dataL as $lahan) {
                 if ($data['kdLahanParkir'] === $lahan['kdLahanParkir']) {
                     $data['kdLahanParkir'] = $lahan['namaLahanParkir'];
@@ -32,18 +32,14 @@ class AlatController extends Controller
             
             // Check apakah ada kesesuaian, jika tidak, atur nilai khusus
             if (!$found) {
-                $data['kdLahanParkir'] = "Lahan Parkir Tidak ditemukan";
+                $data['kdLahanParkir'] = "Lahan Parkir Digusur";
             }
-
-            // Reset flag untuk iterasi selanjutnya
-            $found = false;
         }
 
         return view('admin.Perangkat.alat', [
             "datas" => $datas
         ]);
     }
-
 
     public function formTambah()
     {

@@ -24,7 +24,6 @@
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
   <style>
@@ -37,6 +36,7 @@
     }
     
     .card {
+      width: 350px;
       padding: 20px;
       box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
       background-color: #ffffff;
@@ -53,17 +53,24 @@
             <hr>
         </div>
         <form action="">
-            <div class="mb-3" style="font-family: 'Poppins', sans-serif; font-weight: 700;">
-                <label for="formGroupExampleInput" class="form-label">Username</label>
-                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Masukkan Username">
+          <div class="mb-3" style="font-family: 'Poppins', sans-serif; font-weight: 700;">
+              <label for="formGroupExampleInput" class="form-label">Username</label>
+              <div class="input-group">
+                  <span class="input-group-text"><i class="bi bi-envelope-fill"></i></span>
+                  <input type="email" class="form-control" id="formGroupExampleInput" placeholder="Masukkan Username" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Masukkan alamat email yang valid">
+              </div>
+              <div class="invalid-feedback" style="display: none; color: red; font-size: 14px;">Email tidak valid</div>
+          </div>
+          <div class="mb-3" style="font-family: 'Poppins', sans-serif; font-weight: 700;">
+            <label for="formGroupExampleInput2" class="form-label">Password</label>
+            <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-key-fill"></i></span>
+                <input type="password" class="form-control" id="formGroupExampleInput2" placeholder="Masukkan Password">
             </div>
-            <div class="mb-3" style="font-family: 'Poppins', sans-serif; font-weight: 700;">
-                <label for="formGroupExampleInput2" class="form-label">Password</label>
-                <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Masukkan Password">
-            </div>
-            <div style="font-family: 'Poppins', sans-serif; font-weight: 700;">
-                <button type="submit" class="btn btn-primary w-100" style="background-color: #0F2B36; border : none">Masuk</button>
-            </div>
+          </div>
+          <div style="font-family: 'Poppins', sans-serif; font-weight: 700;">
+              <button type="submit" class="btn btn-primary w-100" style="background-color: #0F2B36; border : none">Masuk</button>
+          </div>
         </form>
     </div>
     <!-- Vendor JS Files -->
@@ -74,10 +81,18 @@
     <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
     <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
     <script src="assets/vendor/php-email-form/validate.js"></script>
-
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
+    <script>
+        document.getElementById('formGroupExampleInput').addEventListener('blur', function() {
+            if (!this.validity.valid) {
+                document.querySelector('.invalid-feedback').style.display = 'block';
+            } else {
+                document.querySelector('.invalid-feedback').style.display = 'none';
+            }
+        });
 
+    </script>
 </body>
 
 </html>
