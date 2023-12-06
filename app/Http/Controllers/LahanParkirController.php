@@ -8,8 +8,7 @@ use Illuminate\Support\Facades\Log;
 
 class LahanParkirController extends Controller
 {
-    public function dashboard()
-    {
+    public function dashboard(){
         $response = Http::get("https://rose-caterpillar-sari.cyclic.app/api/lahan-parkir");
         $datas = $response ->json()['data'];
         
@@ -17,6 +16,31 @@ class LahanParkirController extends Controller
             "datas" => $datas
         ]);
     }
+
+    public function statistikUmum(Request $request) {
+        try {
+            $response = Http::get("https://rose-caterpillar-sari.cyclic.app/api/lahan-parkir");
+
+            if ($response->successful()) {
+                $dataLahanParkir = $response->json()['dataLahanParkir'];
+
+                // Sesuaikan pengambilan data yang diperlukan sesuai kebutuhan untuk grafik di sisi frontend
+                $data = [
+                    'namaLahanParkir' => collect($dataLahanParkir)->pluck('namaLahanParkir')->toArray(),
+                    'sisaLahanParkir' => collect($dataLahanParkir)->pluck('sisaTotalDayaTampung')->toArray(),
+                    // Tambahkan data lain yang diperlukan untuk statistik jika ada
+                ];
+
+                return response()->json($data);
+            } else {
+                return response()->json(['error' => 'Failed to retrieve data'], 500);
+            }
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+
     public function index() {
         $response = Http::get("https://rose-caterpillar-sari.cyclic.app/api/lahan-parkir");
         $datas = $response ->json()['data'];

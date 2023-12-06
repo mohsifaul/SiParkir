@@ -91,28 +91,34 @@ class MaintenanceAlat extends Controller
         // Upload gambar ke Firebase Storage
         if ($request->hasFile('uploadFoto')) {
             $file = $request->file('uploadFoto');
-
-            // Inisialisasi Firebase Admin SDK
-            
-            $storage = app('firebase.storage')->database()->collection('images')->document();
-
+    
+            // Inisialisasi Firebase Admin SDK untuk Storage
+            $storage = new StorageClient([
+                'projectId' => 'siparkir-e0da3',
+                'keyFilePath' => 'path/to/serviceAccountKey.json' // Lokasi dari serviceAccountKey.json di server Anda
+            ]);
+    
             // Dapatkan referensi ke bucket Firebase Storage
-            $bucket = $storage->bucket('gs://siparkir-e0da3.appspot.com/');
-
+            $bucket = $storage->bucket('siparkir-e0da3.appspot.com');
+    
+            // Lokasi di Firebase Storage untuk menyimpan file
+            $destination = 'images/' . $file->getClientOriginalName();
+    
             // Simpan file ke Firebase Storage
-            $destination = 'images/' . $file->getClientOriginalName(); // Lokasi di Firebase Storage untuk menyimpan file
             $bucket->upload(
                 fopen($file->getPathname(), 'r'),
                 [
                     'name' => $destination
                 ]
             );
-
+    
             // Dapatkan URL publik ke file yang diunggah
-            $imageUrl = 'https://storage.googleapis.com/YOUR_STORAGE_BUCKET_NAME/' . $destination;
-
+            $imageUrl = 'https://storage.googleapis.com/siparkir-e0da3.appspot.com/' . $destination;
+    
             // Tambahkan URL gambar ke data yang akan dikirimkan ke API
             $data['linkFotoMaintenance'] = $imageUrl;
+    
+            // Lakukan sesuatu dengan $data, misalnya, menyimpan ke database atau menampilkan ke pengguna
         }
 
         // Kirim data ke API

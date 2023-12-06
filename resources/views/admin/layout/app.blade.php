@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-{{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -21,6 +20,8 @@
     <link rel="stylesheet" href="{{asset('assets-admin/css/theme.css')}}">
     <script src="{{ asset('assets-admin/js/bootstrap.bundle.min.js') }}"></script>
     <title>Dashboard | SiParkir</title>
+    
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-light">
     <div id="db-wrapper">
@@ -57,6 +58,8 @@
     <script src="{{ asset('assets-admin/js/dataTables.responsive.min.js') }}"></script>
     <script src="{{ asset('assets-admin/js/datatable.js') }}"></script>
     <script src="{{ asset('assets-admin/js/sweetalert2.all.min.js') }}"></script>
+    <script src="{{ asset('assets-admin/js/chart.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@12"></script> --}}
 
 </body>
