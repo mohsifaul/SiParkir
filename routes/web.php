@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LahanParkirController;
 use App\Http\Controllers\AlatController;
 use App\Http\Controllers\MaintenanceAlat;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +17,12 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+// Route::get('/homepage', function () {
+//     return view('welcome');
+// });
+// Route::get('/dashboard', function () {
+//     return view('admin/dashboard');
+// });
 
 Route::get('/', function () {
     return view('homepage');
@@ -23,12 +30,8 @@ Route::get('/', function () {
 Route::get('/login', function () {
     return view('login');
 });
-Route::get('/homepage', function () {
-    return view('welcome');
-});
-// Route::get('/dashboard', function () {
-//     return view('admin/dashboard');
-// });
+Route::post('/masuk', [UserController::class, 'login'])->name('login');
+
 Route::get('/dashboard', [LahanParkirController::class, 'dashboard']);
 // Lahan Parkir
 Route::get('/lahan-parkir', [LahanParkirController::class, 'index']);
