@@ -51,7 +51,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    @if($data['kdLahanParkir'] === 'Lahan Parkir Tidak ditemukan')
+                                    @if($data['kdLahanParkir'] === 'Lahan Parkir Tidak ditemukan' || $data['kdLahanParkir'] === 'Lahan Parkir Digusur')
                                         <span class="text-danger fw-bold">{{ $data['kdLahanParkir'] }}</span>
                                     @else
                                         {{ $data['kdLahanParkir'] }}

@@ -145,7 +145,6 @@
             </div>
         </div>
     </div>
-
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const modalImage = document.getElementById('modalImage');
@@ -197,12 +196,17 @@
                     document.getElementById('kdPerawatan').textContent = kdPerawatan;
                     document.getElementById('kdAlat').textContent = data.kdAlat;
 
-                    // Format tanggal tanggalPerawatan
-                    var tanggalPerawatan = new Date(data.tanggalPerawatan);
-                    var formattedtanggalPerawatan = tanggalPerawatan.getDate() + ' ' + tanggalPerawatan.toLocaleString('default', { month: 'long' }) + ' ' + tanggalPerawatan.getFullYear();
-                    document.getElementById('tanggalPerawatan').textContent = formattedtanggalPerawatan;
+                    // Parsing dan pemformatan ulang tanggal
+                    var tanggalParts = data.tanggalPerawatan.split('-'); // Pisahkan tanggal, bulan, dan tahun
+                    var day = tanggalParts[0];
+                    var monthIndex = tanggalParts[1] - 1;
+                    var year = tanggalParts[2];
 
-                    
+                    var monthNames = new Intl.DateTimeFormat('id-ID', { month: 'short' }).formatToParts(new Date(year, monthIndex, 1)).find(part => part.type === 'month').value;
+
+                    var formattedTanggal = day + ' ' + monthNames + ' ' + year;
+                    document.getElementById('tanggalPerawatan').textContent = formattedTanggal;
+
                     document.getElementById('keterangan').textContent = data.keterangan;
                     document.getElementById('namaPengecek').textContent = data.namaPengecek;
                 });
