@@ -6,6 +6,7 @@ use App\Http\Controllers\AlatController;
 use App\Http\Controllers\MaintenanceAlat;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,40 +28,37 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('homepage');
 });
-Route::get('/login', function () {
-    return view('login');
+Route::get('/login', [UserController::class, 'showLogin'])->name('login');
+Route::post('/masuk', [UserController::class, 'login'])->name('masuk');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [LahanParkirController::class, 'dashboard']);
+    Route::get('/statistikUmum', [LahanParkirController::class, 'statistikUmum']);
+
+    // Lahan Parkir
+    Route::get('/lahan-parkir', [LahanParkirController::class, 'index']);
+    Route::get('/tambah-lahan-parkir', [LahanParkirController::class, 'formTambah']);
+    Route::post('/tambah-lahanParkir', [LahanParkirController::class, 'tambah']);
+    Route::get('/edit-lahan/{id}', [LahanParkirController::class, 'formEdit'])->name('edit-lahan');
+    Route::post('/update-lahan/{id}', [LahanParkirController::class, 'update'])->name('update-lahan');
+    Route::post('/hapus-lahan/{id}', [LahanParkirController::class, 'destroy'])->name('hapus-lahan');
+    Route::get('/logParkir', function () {
+        return view('admin/Lahan/logParkir');
+    });
+
+    // alat IoT
+    Route::get('/maintenance-alat', [MaintenanceAlat::class, 'index']);
+    Route::get('/tambah-maintenance-alat', [MaintenanceAlat::class, 'formTambah']);
+    Route::post('/simpan-maintenance-alat', [MaintenanceAlat::class, 'tambah'])->name('simpan-maintenance');
+    Route::post('/hapus-maintenance/{id}', [MaintenanceAlat::class, 'delete'])->name('hapus-maintenance');
+
+    Route::get('/alat-iot', [AlatController::class, 'index']);
+    Route::get('/tambah-alat-iot', [AlatController::class, 'formTambah'])->name('tambah-alat');
+    Route::post('/tambah-alat', [AlatController::class, 'tambah'])->name('tambah-iot');
+    Route::get('/edit-alat/{id}', [AlatController::class, 'formEdit'])->name('edit-alat');
+    Route::post('/update-alat/{id}', [AlatController::class, 'update'])->name('update-alat');
+    Route::post('/hapus-alat/{id}', [AlatController::class, 'destroy'])->name('hapus-alat');    
 });
-Route::post('/masuk', [UserController::class, 'login'])->name('login');
 
-Route::get('/dashboard', [LahanParkirController::class, 'dashboard']);
-Route::get('/statistikUmum', [LahanParkirController::class, 'statistikUmum']);
-
-// Lahan Parkir
-Route::get('/lahan-parkir', [LahanParkirController::class, 'index']);
-Route::get('/tambah-lahan-parkir', [LahanParkirController::class, 'formTambah']);
-Route::post('/tambah-lahanParkir', [LahanParkirController::class, 'tambah']);
-Route::get('/edit-lahan/{id}', [LahanParkirController::class, 'formEdit'])->name('edit-lahan');
-Route::post('/update-lahan/{id}', [LahanParkirController::class, 'update'])->name('update-lahan');
-Route::post('/hapus-lahan/{id}', [LahanParkirController::class, 'destroy'])->name('hapus-lahan');
-Route::get('/logParkir', function () {
-    return view('admin/Lahan/logParkir');
-});
-
-// alat IoT
-// Route::get('/maintenancealat', function () {
-//     return view('admin/Perangkat/maintenanceAlat');
-// });
-Route::get('/maintenance-alat', [MaintenanceAlat::class, 'index']);
-Route::get('/tambah-maintenance-alat', [MaintenanceAlat::class, 'formTambah']);
-Route::post('/simpan-maintenance-alat', [MaintenanceAlat::class, 'tambah'])->name('simpan-maintenance');
-Route::post('/hapus-maintenance/{id}', [MaintenanceAlat::class, 'delete'])->name('hapus-maintenance');
-
-Route::get('/alat-iot', [AlatController::class, 'index']);
-Route::get('/tambah-alat-iot', [AlatController::class, 'formTambah'])->name('tambah-alat');
-Route::post('/tambah-alat', [AlatController::class, 'tambah'])->name('tambah-iot');
-Route::get('/edit-alat/{id}', [AlatController::class, 'formEdit'])->name('edit-alat');
-Route::post('/update-alat/{id}', [AlatController::class, 'update'])->name('update-alat');
-Route::post('/hapus-alat/{id}', [AlatController::class, 'destroy'])->name('hapus-alat');
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');

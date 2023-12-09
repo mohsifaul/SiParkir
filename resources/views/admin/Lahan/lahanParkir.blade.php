@@ -25,6 +25,7 @@
                                     <th>Kode Lahan Parkir</th>
                                     <th>Nama</th>
                                     <th>Daya Tampung</th>
+                                    <th>Sisa Daya Tampung</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -34,6 +35,7 @@
                                     <td>{{$data['kdLahanParkir']}}</td>
                                     <td>{{$data['namaLahanParkir']}}</td>
                                     <td>{{$data['totalDayaTampung']}}</td>
+                                    <td>{{$data['sisaTotalDayaTampung']}}</td>
                                     <td class="text-center aligns-item-center">
                                         <div class="button-container d-flex justify-content-center align-items-center posting-form">
                                             <a href="#!" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"

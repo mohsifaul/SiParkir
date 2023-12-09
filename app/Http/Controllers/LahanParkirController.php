@@ -133,13 +133,16 @@ class LahanParkirController extends Controller
 
     public function update(Request $request, $id)
     {
+        $totalDayaTampung = (int)$request->totalDayaTampung;
         $data = [
             'kdLahanParkir' => $request->kdLahanParkir,
             'namaLahanParkir' => $request->namaLahanParkir,
-            'totalDayaTampung' => (int)$request->totalDayaTampung
+            'totalDayaTampung' => $totalDayaTampung,
+            'sisaTotalDayaTampung' => $totalDayaTampung // Menggunakan nilai totalDayaTampung untuk sisaTotalDayaTampung
         ];
 
-        // dd($request->all());
+        // $data['sisaTotalDayaTampung'] = $totalDayaTampung;
+        // dd($data);
         $response = Http::put("https://rose-caterpillar-sari.cyclic.app/api/lahan-parkir/{$id}", $data);
         
         if ($response->successful()) {

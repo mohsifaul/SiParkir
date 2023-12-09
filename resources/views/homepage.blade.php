@@ -40,7 +40,7 @@
         </div>
       </div>
       <div class="text-left">
-        <a href="/login" class="btn-get-started scrollto">Login</a>
+        <a href="{{route('login')}}" class="btn-get-started scrollto">Login</a>
       </div>
     </div>
   </section><!-- End Hero -->

@@ -45,44 +45,44 @@
 </head>
 
 <body>
-  {{-- @if ($errors->any())
-      <div class="alert alert-danger alert-dismissible" role="alert">
-          <ul>
-              @foreach ($errors->all() as $error)
-                  <li>{{ $error }}</li>
-              @endforeach
-          </ul>
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-  @endif --}}
-  <div class="card">
-      @include('sweetalert::alert')
+    @if ($errors->any())
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+    <div class="card">
+        @include('sweetalert::alert')
         <!-- Isi card Anda di sini -->
         <div>
             <h1 style="font-family: 'Poppins', sans-serif; font-weight: 700;" class="mb-0">SiParkir</h1>
             <p style="font-family: 'Poppins', sans-serif; font-weight: 500;">Sistem Infromasi Manajemen Parkir</p>
             <hr>
         </div>
-        <form action="{{ route('login') }}" method="POST">
-          @csrf
-          <div class="mb-3" style="font-family: 'Poppins', sans-serif; font-weight: 700;">
-              <label for="formGroupExampleInput" class="form-label">Username</label>
-              <div class="input-group">
-                  <span class="input-group-text"><i class="bi bi-envelope-fill"></i></span>
-                  <input type="email" class="form-control" id="formGroupExampleInput" placeholder="Masukkan Username" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Masukkan alamat email yang valid" name="email">
-              </div>
-              <div class="invalid-feedback" style="display: none; color: red; font-size: 14px;">Email tidak valid</div>
-          </div>
-          <div class="mb-3" style="font-family: 'Poppins', sans-serif; font-weight: 700;">
-            <label for="formGroupExampleInput2" class="form-label">Password</label>
-            <div class="input-group">
-                <span class="input-group-text"><i class="bi bi-key-fill"></i></span>
-                <input type="password" class="form-control" id="formGroupExampleInput2" placeholder="Masukkan Password" name="password">
+        <form action="{{ route('masuk') }}" method="POST">
+            @csrf
+            <div class="mb-3" style="font-family: 'Poppins', sans-serif; font-weight: 700;">
+                <label for="formGroupExampleInput" class="form-label">Username</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-envelope-fill"></i></span>
+                    <input type="email" class="form-control" id="formGroupExampleInput" placeholder="Masukkan Username" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Masukkan alamat email yang valid" name="email">
+                </div>
+                <div class="invalid-feedback" style="display: none; color: red; font-size: 14px;">Email tidak valid</div>
             </div>
-          </div>
-          <div style="font-family: 'Poppins', sans-serif; font-weight: 700;">
-              <button type="submit" class="btn btn-primary w-100" style="background-color: #0F2B36; border : none">Masuk</button>
-          </div>
+            <div class="mb-3" style="font-family: 'Poppins', sans-serif; font-weight: 700;">
+                <label for="formGroupExampleInput2" class="form-label">Password</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-key-fill"></i></span>
+                    <input type="password" class="form-control" id="formGroupExampleInput2" placeholder="Masukkan Password" name="password">
+                </div>
+            </div>
+            <div style="font-family: 'Poppins', sans-serif; font-weight: 700;">
+                <button type="submit" class="btn btn-primary w-100" style="background-color: #0F2B36; border : none">Masuk</button>
+            </div>
         </form>
     </div>
     <!-- Vendor JS Files -->

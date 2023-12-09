@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Http;
 
 class UserController extends Controller
 {
+    public function showLogin()
+    {
+        return view('login');
+    }
     public function login(Request $request)
     {
         // Validasi input dari form
@@ -20,24 +24,24 @@ class UserController extends Controller
         $email = $request->input('email');
         $password = $request->input('password');
 
-        try {
-            $response = Http::post('https://rose-caterpillar-sari.cyclic.app/api/user', [
-                'email' => $email,
-                'password' => $password,
-            ]);
+        // Lakukan permintaan ke API untuk otentikasi
+        $response = Http::post('https://rose-caterpillar-sari.cyclic.app/api/user/login', [
+            'email' => $email,
+            'password' => $password,
+        ]);
 
-            if ($response->status() === 200) {
-                // Login berhasil
-                return redirect('/dashboard');
-            } else {
-                // Login gagal
-                return back()->with('error', 'Login gagal. Periksa kembali email dan password Anda.');
-            }
-        } catch (\Exception $e) {
-            // Tangani kesalahan jika permintaan ke API gagal
-            \Log::error('Error: ' . $e->getMessage()); // Log pesan error untuk debugging
-            return back()->with('error', 'Terjadi kesalahan saat melakukan login. Silakan coba lagi.');
+        // dd($response);
+        if ($response->successful()) {
+            // Jika otentikasi berhasil, simpan informasi pengguna atau token ke dalam session
+            // $apiToken = $response['token'];
+            // session(['api_token' => $apiToken]);
+
+            return redirect('/dashboard');
+        } else {
+            // Jika otentikasi gagal, redirect kembali ke halaman login
+            return redirect()->back()->with('error', 'Login gagal. Periksa kembali email dan password Anda.');
         }
     }
+
 
 }
