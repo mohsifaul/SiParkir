@@ -21,27 +21,25 @@
                         <table id="example2" class="table text-nowrap table-centered mt-0" style="width: 100%">
                             <thead class="table-light">
                             <tr>
+                                <th>Tanggal</th>
                                 <th>Jam</th>
                                 <th>Kode Lahan Parkir</th>
                                 {{-- <th>Action</th> --}}
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>07 : 00</td>
-                                <td>Lahan Parkir 1</td>
-                                {{-- <td>
-                                    <a href="#!" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                        data-template="eyeOne"
-                                        data-bs-toggle="modal" 
-                                        data-bs-target="#modalDetail">
-                                        <i data-feather="eye" class="icon-xs"></i>
-                                        <div id="eyeOne" class="d-none">
-                                        <span>View</span>
-                                        </div>
-                                    </a>
-                                </td> --}}
-                            </tr>
+                                @foreach ($dataParkir as $item)
+                                    <tr>
+                                        @php
+                                            $dateTime = new DateTime($item['tanggalParkir']);
+                                            $tanggal = $dateTime->format('d F Y');
+                                            $waktu = $dateTime->format('H:i:s');
+                                        @endphp
+                                        <td>{{ $tanggal }}</td>
+                                        <td>{{ $waktu }}</td>
+                                        <td>{{ $item['namaLahanParkir'] }}</td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -65,27 +63,25 @@
                         <table id="example" class="table text-nowrap table-centered mt-0" style="width: 100%">
                             <thead class="table-light">
                             <tr>
+                                <th>Tanggal</th>
                                 <th>Jam</th>
                                 <th>Kode Lahan Parkir</th>
                                 {{-- <th>Action</th> --}}
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>07 : 00</td>
-                                <td>Lahan Parkir 1</td>
-                                {{-- <td>
-                                    <a href="#!" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                        data-template="eyeOne"
-                                        data-bs-toggle="modal" 
-                                        data-bs-target="#modalDetail">
-                                        <i data-feather="eye" class="icon-xs"></i>
-                                        <div id="eyeOne" class="d-none">
-                                        <span>View</span>
-                                        </div>
-                                    </a>
-                                </td> --}}
-                            </tr>
+                            @foreach ($dataKeluar as $item)
+                                <tr>
+                                    @php
+                                        $dateTime = new DateTime($item['tanggalParkir']);
+                                        $tanggal = $dateTime->format('d F Y');
+                                        $waktu = $dateTime->format('H:i:s');
+                                    @endphp
+                                    <td>{{ $tanggal }}</td>
+                                    <td>{{ $waktu }}</td>
+                                    <td>{{ $item['namaLahanParkir'] }}</td>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>

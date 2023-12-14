@@ -40,6 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'api' => [
+            'driver' => 'firebase',
+            'provider' => 'firebaseApi', // Sesuaikan dengan nama provider yang Anda gunakan
+        ],
     ],
 
     /*
@@ -64,11 +68,11 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'firebaseApi' => [
+            'driver' => 'firebase',
+            // Sesuaikan model dengan model pengguna Firebase yang digunakan
+            'model' => \Kreait\Laravel\Firebase\Auth\User::class,
+        ],
     ],
 
     /*

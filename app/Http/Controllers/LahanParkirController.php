@@ -168,4 +168,61 @@ class LahanParkirController extends Controller
         }
     }
 
+    public function log() {
+        $parkirResponse = Http::get("https://rose-caterpillar-sari.cyclic.app/api/parkir/LP001");
+        $parkirData = $parkirResponse->json();
+
+        $parkirNamesResponse = Http::get("https://rose-caterpillar-sari.cyclic.app/api/lahan-parkir");
+        $parkirNamesData = $parkirNamesResponse->json();
+
+        // Periksa apakah respons berhasil dan memiliki data
+        if ($parkirResponse->successful() && isset($parkirData['data']) && $parkirNamesResponse->successful() && isset($parkirNamesData['data'])) {
+            $parkirStatus = array_filter($parkirData['data'], function($item) {
+                return $item['status'] === 'parkir' || $item['status'] === 'keluar';
+            });
+
+            $dataParkir = array_filter($parkirStatus, function($item) {
+                return $item['status'] === 'parkir';
+            });
+
+            $dataKeluar = array_filter($parkirStatus, function($item) {
+                return $item['status'] === 'keluar';
+            });
+
+            // Fungsi untuk mengurutkan berdasarkan tanggal terbaru
+            usort($dataParkir, function($a, $b) {
+                return strtotime($b['tanggalParkir']) - strtotime($a['tanggalParkir']);
+            });
+
+            usort($dataKeluar, function($a, $b) {
+                return strtotime($b['tanggalParkir']) - strtotime($a['tanggalParkir']);
+            });
+
+            // Mencocokkan kdLahanParkir dengan nama lahan dari response lahan parkir
+            $parkirNames = collect($parkirNamesData['data']);
+            $dataParkir = collect($dataParkir)->map(function ($item) use ($parkirNames) {
+                $namaLahan = $parkirNames->where('kdLahanParkir', $item['kdLahanParkir'])->pluck('namaLahanParkir')->first();
+                $item['namaLahanParkir'] = $namaLahan ?? 'Lahan Parkir tidak ditemukan'; // Jika tidak ada, berikan nilai default
+                return $item;
+            })->toArray();
+
+            $dataKeluar = collect($dataKeluar)->map(function ($item) use ($parkirNames) {
+                $namaLahan = $parkirNames->where('kdLahanParkir', $item['kdLahanParkir'])->pluck('namaLahanParkir')->first();
+                $item['namaLahanParkir'] = $namaLahan ?? 'Lahan Parkir tidak ditemukan'; // Jika tidak ada, berikan nilai default
+                return $item;
+            })->toArray();
+
+        } else {
+            // Jika respons tidak berhasil atau tidak memiliki data, atur array menjadi kosong
+            $dataParkir = [];
+            $dataKeluar = [];
+        }
+
+        return view('admin/Lahan/logParkir', [
+            "dataParkir" => $dataParkir,
+            "dataKeluar" => $dataKeluar
+        ]);
+    }
+
+
 }

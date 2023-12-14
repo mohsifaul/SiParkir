@@ -13,6 +13,11 @@ return [
     | a conventional file to locate the various service credentials.
     |
     */
+    'ApiFirebase' => [
+        'credentials' => [
+            'file' => base_path('firebase_credentials.json'), // Menggunakan base_path() untuk mengakses root direktori Laravel
+        ],
+    ],
 
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),

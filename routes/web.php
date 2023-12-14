@@ -28,10 +28,13 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {
     return view('homepage');
 });
+Route::get('/coba', function () {
+    return view('admin/parkir/coba');
+});
 Route::get('/login', [UserController::class, 'showLogin'])->name('login');
-Route::post('/masuk', [UserController::class, 'login'])->name('masuk');
-Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', [LahanParkirController::class, 'dashboard']);
+Route::post('/masuk', [UserController::class, 'auth'])->name('masuk');
+// Route::middleware(['auth:api'])->group(function () {
+    Route::get('/dashboard', [LahanParkirController::class, 'dashboard'])->name('dashboard');
     Route::get('/statistikUmum', [LahanParkirController::class, 'statistikUmum']);
 
     // Lahan Parkir
@@ -41,9 +44,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/edit-lahan/{id}', [LahanParkirController::class, 'formEdit'])->name('edit-lahan');
     Route::post('/update-lahan/{id}', [LahanParkirController::class, 'update'])->name('update-lahan');
     Route::post('/hapus-lahan/{id}', [LahanParkirController::class, 'destroy'])->name('hapus-lahan');
-    Route::get('/logParkir', function () {
-        return view('admin/Lahan/logParkir');
-    });
+    Route::get('/log-parkir', [LahanParkirController::class, 'log']);
 
     // alat IoT
     Route::get('/maintenance-alat', [MaintenanceAlat::class, 'index']);
@@ -57,7 +58,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/edit-alat/{id}', [AlatController::class, 'formEdit'])->name('edit-alat');
     Route::post('/update-alat/{id}', [AlatController::class, 'update'])->name('update-alat');
     Route::post('/hapus-alat/{id}', [AlatController::class, 'destroy'])->name('hapus-alat');    
-});
+// });
 
 
 // Route::get('/dashboard', function () {

@@ -28,7 +28,7 @@
                             <a class="nav-link " href="/lahan-parkir">Data Lahan Parkir</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link has-arrow"  href="/logParkir" >Log Histori Parkir</a>
+                            <a class="nav-link has-arrow"  href="/log-parkir" >Log Histori Parkir</a>
                         </li>
                     </ul>
                 </div>
