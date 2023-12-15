@@ -16,6 +16,8 @@
     <link href="{{ asset('assets-admin/css/prism-okaidia.css') }}" rel="stylesheet">
     <link href="{{ asset('assets-admin/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets-admin/css/simplebar.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('assets-admin/css/owl.carousel.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('assets-admin/css/owl.theme.default.min.css')}}" rel="stylesheet">
     <!-- Theme CSS -->
     <link rel="stylesheet" href="{{asset('assets-admin/css/theme.css')}}">
     <script src="{{ asset('assets-admin/js/bootstrap.bundle.min.js') }}"></script>
@@ -59,6 +61,7 @@
     <script src="{{ asset('assets-admin/js/datatable.js') }}"></script>
     <script src="{{ asset('assets-admin/js/sweetalert2.all.min.js') }}"></script>
     <script src="{{ asset('assets-admin/js/chart.js') }}"></script>
+    <script src="{{ asset('assets-admin/js/owl.carousel.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@12"></script> --}}
 </body>

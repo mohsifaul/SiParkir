@@ -8,7 +8,7 @@
                     <div class="mb-0 mb-lg-0">
                         <h3 class="mb-0 text-white">Maintenance Perangkat IoT</h3>
                     </div>
-                    <a href="/tambah-maintenance-alat" class="btn btn-light text-primary fw-bold"><i class="bi bi-plus-circle-fill"></i> Tambah</a>
+                    {{-- <a href="/tambah-maintenance-alat" class="btn btn-light text-primary fw-bold"><i class="bi bi-plus-circle-fill"></i> Tambah</a> --}}
                 </div>
             </div>
         </div>
