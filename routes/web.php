@@ -33,6 +33,8 @@ Route::get('/coba', function () {
 });
 Route::get('/login', [UserController::class, 'showLogin'])->name('login');
 Route::post('/masuk', [UserController::class, 'auth'])->name('masuk');
+Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+
 // Route::middleware(['auth:api'])->group(function () {
     Route::get('/dashboard', [LahanParkirController::class, 'dashboard'])->name('dashboard');
     Route::get('/statistikUmum', [LahanParkirController::class, 'statistikUmum']);

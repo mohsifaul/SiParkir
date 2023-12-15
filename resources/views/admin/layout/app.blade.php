@@ -61,6 +61,5 @@
     <script src="{{ asset('assets-admin/js/chart.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@12"></script> --}}
-
 </body>
 </html>

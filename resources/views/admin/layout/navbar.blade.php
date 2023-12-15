@@ -1,12 +1,12 @@
 <nav class="navbar-classic navbar navbar-expand-lg">
     <a id="nav-toggle" href="#"><i
         data-feather="menu" class="nav-icon me-2 icon-xs"></i></a>
-    <div class="ms-lg-3 d-none d-md-none d-lg-block">
+    {{-- <div class="ms-lg-3 d-none d-md-none d-lg-block">
     <!-- Form -->
     <form class="d-flex align-items-center">
         <input type="search" class="form-control" placeholder="Search" />
     </form>
-    </div>
+    </div> --}}
     <!--Navbar nav -->
     <ul class="navbar-nav navbar-right-wrap ms-auto d-flex nav-top-wrap">
         {{-- <li class="dropdown stopevent">
@@ -69,7 +69,11 @@
             aria-labelledby="dropdownUser">
                 <div class="px-4 pb-0 pt-2">
                     <div class="lh-1 ">
-                        <h5 class="mb-1"> John E. Grainger</h5>
+                        @if(session()->has('username'))
+                            <h5 class="mb-1">{{ session('username') }}</h5>
+                        @else
+                            <h5 class="mb-1">Admin</h5>
+                        @endif
                         <span class="text-inherit fs-6">Pegawai BUMN</span>
                         {{-- <a href="#" class="text-inherit fs-6">View my profile</a> --}}
                     </div>
@@ -77,34 +81,8 @@
                 </div>
                 <ul class="list-unstyled">
                     <li>
-                        <a class="dropdown-item" href="#">
-                            <i class="me-2 icon-xxs dropdown-item-icon" data-feather="user"></i>Edit
-                            Profile
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item"
-                            href="#">
-                            <i class="me-2 icon-xxs dropdown-item-icon"
-                            data-feather="activity"></i>Activity Log
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item text-primary" href="#">
-                            <i class="me-2 icon-xxs text-primary dropdown-item-icon"
-                            data-feather="star"></i>Go Pro
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="#">
-                            <i class="me-2 icon-xxs dropdown-item-icon"
-                            data-feather="settings"></i>Account Settings
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="./index.html">
-                            <i class="me-2 icon-xxs dropdown-item-icon"
-                            data-feather="power"></i>Sign Out
+                        <a id="logout-btn" class="dropdown-item" href="#">
+                            <i class="me-2 icon-xxs dropdown-item-icon" data-feather="power"></i>Sign Out
                         </a>
                     </li>
                 </ul>
@@ -112,3 +90,33 @@
         </li>
     </ul>
 </nav>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const logoutButton = document.getElementById('logout-btn');
+
+        logoutButton.addEventListener('click', function(event) {
+            event.preventDefault();
+
+            Swal.fire({
+                title: 'Konfirmasi',
+                text: 'Apakah Anda yakin ingin keluar?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "{{ route('logout') }}";
+                }
+            });
+        });
+
+        const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        const tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    });
+
+</script>

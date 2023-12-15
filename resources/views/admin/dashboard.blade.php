@@ -28,10 +28,9 @@
                             <i class="bi bi-briefcase fs-4"></i>
                             </div>
                         </div>
-                        <!-- project number -->
                         <div>
                             <h1 class="fw-bold">{{$item['totalDayaTampung']}}</h1>
-                            <p class="mb-0"><span class="text-dark me-2">2</span>Kosong</p>
+                            <p class="mb-0"><span class="text-dark me-2">{{$item['sisaTotalDayaTampung']}}</span>Kosong</p>
                         </div>
                     </div>
                 </div>
